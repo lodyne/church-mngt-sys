@@ -7,7 +7,13 @@
             <div class="row">
                 <div class="col-sm-8"><h2>Members <b>Details</b></h2></div>
                 <div class="col-sm-4 ">
-                    <button type="button" class="btn btn-sm btn-primary my-2 float-right"><i class="fa fa-plus"></i> Add New</button>
+                    <a 
+                        type="button" 
+                        href="{% url 'member-create' %}"
+                        class="btn btn-sm btn-primary my-2 float-right">
+                        <i class="fa fa-plus"></i>
+                        Add New
+                    </a>
                 </div>
             </div>
         </div>
@@ -25,52 +31,31 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Mark</td>
-                    <td>32</td>
-                    <td>Male</td>
-                    <td>Single</td>
-                    <td>Yes</td>
-                    <td>Yes</td>
-                    <td>
-                        <a
-                            type="button"
-                            class="btn btn-sm btn-info"
-                            href="#">
-                            <i class="fa fa-pencil" aria-hidden="true"></i>
-                        </a>
-                        <a
-                            type="button"
-                            class="btn btn-sm btn-danger"
-                            href="#">
-                            <i class="fa fa-trash" aria-hidden="true"></i>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Lui</td>
-                    <td>24</td>
-                    <td>Male</td>
-                    <td>Single</td>
-                    <td>Yes</td>
-                    <td>Yes</td>
-                    <td>
-                        
-                        <a
-                            type="button"
-                            class="btn btn-sm btn-info"
-                            href="#">
-                            <i class="fa fa-pencil" aria-hidden="true"></i>
-                        </a>
-                        <a
-                            type="button"
-                            class="btn btn-sm btn-danger"
-                            href="#">
-                            <i class="fa fa-trash" aria-hidden="true"></i>
-                        </a>
-                    
-                    </td>
-                </tr>
+                
+                {% for object in object_list  %}
+                    <tr>
+                        <td>{{ object.name }}</td>
+                        <td>{{ object.age }}</td>
+                        <td>{{ object.gender }}</td>
+                        <td>{{ object.status }}</td>
+                        <td>{{ object.is_baptized }}</td>
+                        <td>{{ object.is_contributed }}</td>
+                        <td>
+                            <a
+                                type="button"
+                                class="btn btn-sm btn-info"
+                                href="{% url 'member-update' %} object.id">
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                            </a>
+                            <a
+                                type="button"
+                                class="btn btn-sm btn-danger"
+                                href="{% url 'member-delete' object.id %}">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>

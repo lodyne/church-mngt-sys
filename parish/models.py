@@ -50,8 +50,8 @@ class Member(models.Model):
     age = models.PositiveIntegerField()
     gender = models.CharField(max_length=50, choices = GENDER)
     marital_status = models.CharField(max_length=50, choices = STATUS)
-    is_contributed = models.BooleanField()
-    is_baptized = models.BooleanField()
+    is_contributed = models.BooleanField(null = True, blank = True)
+    is_baptized = models.BooleanField(null = True, blank = True)
 
     class Meta:
 
