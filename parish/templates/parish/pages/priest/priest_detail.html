@@ -1,30 +1,49 @@
-<table class="table table-hover ">
-    <thead class="thead-dark">
-        <tr>
-            
-            <th scope="col">Name</th>
-            <th scope="col">Status</th>
-            <th scope="col">Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>
-                <a
-                    type="button"
-                    class="btn btn-sm btn-info"
-                    href="#">
-                    <i class="fa fa-pencil" aria-hidden="true"></i>
-                </a>
-                <a
-                    type="button"
-                    class="btn btn-sm btn-danger"
-                    href="#">
-                    <i class="fa fa-trash" aria-hidden="true"></i>
-                </a>
-            </td>
-        </tr>
-    </tbody>
-</table>
+{% include 'parish/base.html' %}
+{% block content %}
+    <div class="container">
+        <div class="table-title">
+            <div class="row">
+                <div class="col-sm-8"><h2>Priest <b>Detail</b></h2></div>
+                <div class="col-sm-4">
+                    <a 
+                        type="button" 
+                        href="{% url 'priest-create' %}"
+                        class="btn btn-sm btn-primary my-2 float-right">
+                        <i class="fa fa-plus"></i>
+                        Add New
+                    </a>
+                </div>
+            </div>
+        </div>
+        <table class="table table-hover ">
+            <thead class="thead-dark">
+                <tr>
+                    
+                    <th scope="col">Name</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                    <tr>
+                        <td>{{ object.name}}</td>
+                        <td>{{ object.status }}</td>
+                        <td>
+                            <a
+                                type="button"
+                                class="btn btn-sm btn-info"
+                                href="{% url 'priest-update' object.id %} ">
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                            </a>
+                            <a
+                                type="button"
+                                class="btn btn-sm btn-danger"
+                                href="{% url 'priest-delete' object.id %} ">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </a>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock content %}

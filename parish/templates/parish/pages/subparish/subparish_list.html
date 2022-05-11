@@ -33,14 +33,20 @@
                         <td>
                             <a
                                 type="button"
+                                class="btn btn-sm btn-secondary"
+                                href="{% url 'subparish-detail' object.id %}">
+                                <i class="fa fa-filter" aria-hidden="true"></i>
+                            </a>
+                            <a
+                                type="button"
                                 class="btn btn-sm btn-info"
-                                href="{% url 'subparish-update' %} object.id">
+                                href="{% url 'subparish-update' object.id %} ">
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                             </a>
                             <a
                                 type="button"
                                 class="btn btn-sm btn-danger"
-                                href="{% url 'subparish-delete' %} object.id">
+                                href="{% url 'subparish-delete' object.id %} ">
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </a>
                         </td>

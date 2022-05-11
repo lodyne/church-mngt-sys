@@ -82,5 +82,5 @@ urlpatterns = [
     path('subparish/new',SubParishCreateView.as_view(), name = 'subparish-create'),
     path('subparish/<int:pk>',SubParishDetailView.as_view(), name = 'subparish-detail'),
     path('subparish/<int:pk>/update',SubParishUpdateView.as_view(), name = 'subparish-update'),
-    path('subparish/<int:pk>/delete',SubParishDeleteView.as_view(), name = 'subparishdelete'),
+    path('subparish/<int:pk>/delete',SubParishDeleteView.as_view(), name = 'subparish-delete'),
 ]

@@ -98,7 +98,7 @@ class Contribution(models.Model):
     )
 
     amount = models.DecimalField(max_digits=25, decimal_places=2)
-    member = models.ManyToManyField(Member)
+    member = models.ForeignKey(Member, on_delete=models.CASCADE)
     rank = models.CharField(max_length=50, choices = RANK)
     type = models.CharField(max_length=50, choices = TYPE)
 
@@ -108,7 +108,7 @@ class Contribution(models.Model):
         verbose_name_plural = 'Contributions'
 
     def __str__(self):
-        return self.member
+        return str(self.member)
 
 class Committee(models.Model):
     ROLES = (

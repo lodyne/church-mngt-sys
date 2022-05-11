@@ -1,8 +1,6 @@
 {% include 'parish/base.html' %}
 {% block content %}
     <div class="container">
-        
-        
         <div class="table-title">
             <div class="row">
                 <div class="col-sm-8"><h2>Members <b>Details</b></h2></div>
@@ -37,14 +35,20 @@
                         <td>{{ object.name }}</td>
                         <td>{{ object.age }}</td>
                         <td>{{ object.gender }}</td>
-                        <td>{{ object.status }}</td>
+                        <td>{{ object.marital_status }}</td>
                         <td>{{ object.is_baptized }}</td>
                         <td>{{ object.is_contributed }}</td>
                         <td>
                             <a
                                 type="button"
+                                class="btn btn-sm btn-secondary"
+                                href="{% url 'member-detail' object.id %}">
+                                <i class="fa fa-filter" aria-hidden="true"></i>
+                            </a>
+                            <a
+                                type="button"
                                 class="btn btn-sm btn-info"
-                                href="{% url 'member-update' %} object.id">
+                                href="{% url 'member-update' object.id %}">
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                             </a>
                             <a

@@ -34,6 +34,12 @@
                         <td>
                             <a
                                 type="button"
+                                class="btn btn-sm btn-secondary"
+                                href="{% url 'community-detail' object.id %}">
+                                <i class="fa fa-filter" aria-hidden="true"></i>
+                            </a>
+                            <a
+                                type="button"
                                 class="btn btn-sm btn-info"
                                 href="{% url 'community-update' object.id %}">
                                 <i class="fa fa-pencil" aria-hidden="true"></i>

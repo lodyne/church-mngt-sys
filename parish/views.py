@@ -1,6 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
+from django.contrib import messages
 from django.views import View
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 from django.views.generic import ( 
     TemplateView,
     CreateView,
@@ -9,6 +12,7 @@ from django.views.generic import (
     UpdateView,
     DeleteView
 )
+from parish.forms import UserRegisterForm
 
 from parish.models import (
     Committee, 
@@ -21,12 +25,12 @@ from parish.models import (
 
 # Create your views here.
 
-class HomeView(TemplateView):
+class HomeView(LoginRequiredMixin,TemplateView):
     template_name = "parish/layout/home.html"
 
 #* CRUD for Priest Model
 
-class BasePriestView(View):
+class BasePriestView(LoginRequiredMixin,View):
     model = Priest
     fields = '__all__'
     success_url = reverse_lazy('priest-list')
@@ -44,11 +48,11 @@ class PriestUpdateView(BasePriestView,UpdateView):
     template_name = "parish/pages/priest/priest_form.html"
 
 class PriestDeleteView(BasePriestView,DeleteView):
-    template_name = "parish/pages/priest/priest_confirm_detail.html"
+    template_name = "parish/pages/priest/priest_confirm_delete.html"
 
 #* CRUD for Member Model
 
-class BaseMemberView(View):
+class BaseMemberView(LoginRequiredMixin,View):
     model = Member
     fields = '__all__'
     success_url = reverse_lazy('member-list')
@@ -66,10 +70,10 @@ class MemberUpdateView(BaseMemberView,UpdateView):
     template_name = "parish/pages/member/member_form.html"
 
 class MemberDeleteView(BaseMemberView,DeleteView):
-    template_name = "parish/pages/member/member_confirm_detail.html"
+    template_name = "parish/pages/member/member_confirm_delete.html"
 
 #* CRUD for Community Model
-class BaseCommunityView(View):
+class BaseCommunityView(LoginRequiredMixin,View):
     model = Community
     fields = '__all__'
     success_url = reverse_lazy('community-list')
@@ -87,10 +91,10 @@ class CommunityUpdateView(BaseCommunityView,UpdateView):
     template_name = "parish/pages/community/community_form.html"
 
 class CommunityDeleteView(BaseCommunityView,DeleteView):
-    template_name = "parish/pages/community/community_confirm_detail.html"
+    template_name = "parish/pages/community/community_confirm_delete.html"
 
 #* CRUD for Contribution Model
-class BaseContributionView(View):
+class BaseContributionView(LoginRequiredMixin,View):
     model = Contribution
     fields = '__all__'
     success_url = reverse_lazy('contribution-list')
@@ -108,11 +112,11 @@ class ContributionUpdateView(BaseContributionView,UpdateView):
     template_name = "parish/pages/contribution/contribution_form.html"
 
 class ContributionDeleteView(BaseContributionView,DeleteView):
-    template_name = "parish/pages/contribution/contribution_confirm_detail.html"
+    template_name = "parish/pages/contribution/contribution_confirm_delete.html"
 
 #* CRUD for Committee Model
 
-class BaseCommitteeView(View):
+class BaseCommitteeView(LoginRequiredMixin,View):
     model = Committee
     fields = '__all__'
     success_url = reverse_lazy('committee-list')
@@ -127,29 +131,46 @@ class CommitteeDetailView(BaseCommitteeView,DetailView):
     template_name = "parish/pages/committee/committee_detail.html"
 
 class CommitteeUpdateView(BaseCommitteeView,UpdateView):
-    template_name = "pages/committee/committee_form.html"
+    template_name = "parish/pages/committee/committee_form.html"
 
 class CommitteeDeleteView(BaseCommitteeView,DeleteView):
-    template_name = "parish/pages/committee/committee_confirm_detail.html"
+    template_name = "parish/pages/committee/committee_confirm_delete.html"
 
 #* CRUD for SubParish Model
 
-class BaseSbParishView(View):
+class BaseSubParishView(LoginRequiredMixin,View):
     model = SubParish
     fields = '__all__'
     success_url = reverse_lazy('subparish-list')
 
-class SubParishListView(BaseCommitteeView,ListView):
+class SubParishListView(BaseSubParishView,ListView):
     template_name = "parish/pages/subparish/subparish_list.html"
     
-class SubParishCreateView(BaseCommitteeView,CreateView):
+class SubParishCreateView(BaseSubParishView,CreateView):
     template_name = "parish/pages/subparish/subparish_form.html"
 
-class SubParishDetailView(BaseCommitteeView,DetailView):
+class SubParishDetailView(BaseSubParishView,DetailView):
     template_name = "parish/pages/subparish/subparish_detail.html"
 
-class SubParishUpdateView(BaseCommitteeView,UpdateView):
+class SubParishUpdateView(BaseSubParishView,UpdateView):
     template_name = "parish/pages/subparish/subparish_form.html"
 
-class SubParishDeleteView(BaseContributionView,DeleteView):
-    template_name = "parish/pages/subparish/subparish_confirm_detail.html"
+class SubParishDeleteView(BaseSubParishView,DeleteView):
+    template_name = "parish/pages/subparish/subparish_confirm_delete.html"
+
+def register(request):
+    if request.method == 'POST':
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            messages.success(
+                request, f"Hi {username}, you have been created an account. Login now")
+            return redirect('login')
+    else:
+        form = UserRegisterForm()
+
+    context = {
+        'form': form
+    }
+    return render(request, 'parish/auth/register.html', context)
