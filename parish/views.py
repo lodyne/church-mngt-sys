@@ -22,7 +22,7 @@ from parish.models import (
 # Create your views here.
 
 class HomeView(TemplateView):
-    template_name = "parish/layouts/home.html"
+    template_name = "parish/layout/home.html"
 
 #* CRUD for Priest Model
 
@@ -129,7 +129,7 @@ class CommitteeDetailView(BaseCommitteeView,DetailView):
 class CommitteeUpdateView(BaseCommitteeView,UpdateView):
     template_name = "pages/committee/committee_form.html"
 
-class ContributionDeleteView(BaseContributionView,DeleteView):
+class CommitteeDeleteView(BaseCommitteeView,DeleteView):
     template_name = "pages/committee/committee_confirm_detail.html"
 
 #* CRUD for SubParish Model
