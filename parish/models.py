@@ -112,11 +112,11 @@ class Contribution(models.Model):
 
 class Committee(models.Model):
     ROLES = (
-        ('chairman', 'Chairman'),
-        ('deputy_chairman', 'Deputy Chairman'),
-        ('general_secretary', 'General Secretary'),
-        ('deputy_secretary', 'Deputy Secretary'),
-        ('accountant', 'Accountant')
+        ('Chairman', 'Chairman'),
+        ('Deputy Chairman', 'Deputy Chairman'),
+        ('General Secretary', 'General Secretary'),
+        ('Deputy Secretary', 'Deputy Secretary'),
+        ('Accountant', 'Accountant')
     )
 
     name = models.CharField(max_length=50)

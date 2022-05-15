@@ -122,7 +122,7 @@ class BaseCommitteeView(LoginRequiredMixin,View):
     success_url = reverse_lazy('committee-list')
 
 class CommitteeListView(BaseCommitteeView,ListView):
-    template_name = "parish/pages/committee/commitee_list.html"
+    template_name = "parish/pages/committee/committee_list.html"
     
 class CommitteeCreateView(BaseCommitteeView,CreateView):
     template_name = "parish/pages/committee/committee_form.html"

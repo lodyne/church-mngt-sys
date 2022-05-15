@@ -1,51 +1,29 @@
-{% include 'parish/base.html' %}
-{% block content %}
-    <div class="container">
-        <div class="table-title">
-            <div class="row">
-                <div class="col-sm-8"><h2>Member <b>Detail</b></h2></div>
-                <div class="col-sm-4 ">
-                    <button type="button" class="btn btn-sm btn-primary my-2 float-right"><i class="fa fa-plus"></i> Add New</button>
-                </div>
-            </div>
-        </div>
-        <table class="table table-hover ">
-            <thead class="thead-dark">
-                <tr>
-                    
-                    <th scope="col">Name</th>
-                    <th scope="col">Age</th>
-                    <th scope="col">Gender</th>
-                    <th scope="col">Marital Status</th>
-                    <th scope="col">Baptized</th>
-                    <th scope="col">Contributed</th>
-                    <th scope="col">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>{{ object.name }}</td>
-                    <td>{{ object.age }}</td>
-                    <td>{{ object.gender }}</td>
-                    <td>{{ object.marital_status }}</td>
-                    <td>{{ object.is_baptized }}</td>
-                    <td>{{ object.is_contributed }}</td>
-                    <td>
-                        <a
-                            type="button"
-                            class="btn btn-sm btn-info"
-                            href="{% url 'member-update' object.id %}">
-                            <i class="fa fa-pencil" aria-hidden="true"></i>
-                        </a>
-                        <a
-                            type="button"
-                            class="btn btn-sm btn-danger"
-                            href="{% url 'member-delete' object.id %}">
-                            <i class="fa fa-trash" aria-hidden="true"></i>
-                        </a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-{% endblock content %}
+{% extends 'parish\pages\member\member_list.html' %} 
+    {% block header %}
+        <div class="col-sm-8"><h2>Member <b>Detail</b></h2></div>
+    {% endblock header %}
+
+    {% block forloop %}
+        <tr>
+            <td>{{ object.name }}</td>
+            <td>{{ object.age }}</td>
+            <td>{{ object.gender }}</td>
+            <td>{{ object.marital_status }}</td>
+            <td>{{ object.is_baptized }}</td>
+            <td>{{ object.is_contributed }}</td>
+            <td>
+                <a
+                    type="button"
+                    class="btn btn-sm btn-info"
+                    href="{% url 'member-update' object.id %}">
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                </a>
+                <a
+                    type="button"
+                    class="btn btn-sm btn-danger"
+                    href="{% url 'member-delete' object.id %}">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                </a>
+            </td>
+        </tr>
+    {% endblock forloop %}

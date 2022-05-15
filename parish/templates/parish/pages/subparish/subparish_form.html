@@ -1,17 +1,8 @@
-{% extends 'parish/base.html' %}
-{% load crispy_forms_tags %} 
-{% block content %}
-<div class="container d-flex justify-content-center">
-	<div class="col-md-4">
-		<form class="form" method="post" enctype="multipart/form-data">
-			{% csrf_token %}
-			<fieldset class="form-group">
-				<legend class="border-bottom text-center mb-4">Add A New Sub Parish</legend>
-				{{form | crispy}}
-			</fieldset>
-
-			<button type="submit" class="btn btn-outline-primary">Add Sub Parish</button>
-		</form>
-	</div>
-</div>
-{% endblock content %}
+{% extends 'parish\pages\form.html' %}
+{% block legend %}
+    <legend class="border-bottom text-center mb-4">Add A New Sub Parish</legend>
+{% endblock legend %}
+				
+{% block button %}
+    <button type="submit" class="btn btn-outline-primary">Add Sub Parish</button>
+{% endblock button %}

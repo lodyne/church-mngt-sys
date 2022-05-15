@@ -1,17 +1,11 @@
-{% extends 'parish/base.html' %}
-{% load crispy_forms_tags %} 
-{% block content %}
-<div class="container d-flex justify-content-center">
-	<div class="col-md-4">
-		<form class="form" method="post" enctype="multipart/form-data">
-			{% csrf_token %}
-			<fieldset class="form-group">
-				<legend class="border-bottom text-center mb-4">Add A New Priest</legend>
-				{{ form | crispy }}
-			</fieldset>
+{% extends 'parish\pages\form.html' %}
+{% block legend %}
+    <legend class="border-bottom text-center mb-4">Add A New Priest</legend>
+{% endblock legend %}
 
-			<button type="submit" class="btn btn-outline-primary">Add Priest</button>
-		</form>
-	</div>
-</div>
-{% endblock content %}
+{% block button %}
+    <button type="submit" class="btn btn-outline-primary">Add Priest</button>
+{% endblock button %}
+
+			
+	

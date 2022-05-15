@@ -3,7 +3,9 @@
     <div class="container">
         <div class="table-title">
             <div class="row">
-                <div class="col-sm-8"><h2>Sub Parish <b>Details</b></h2></div>
+                {% block header %}
+                    <div class="col-sm-8"><h2>Sub Parish <b>Details</b></h2></div>
+                {% endblock header %}
                 <div class="col-sm-4">
                     <a 
                     type="button" 
@@ -26,33 +28,34 @@
             </thead>
             <tbody>
                 
-                {% for object in object_list  %} 
-                    <tr>
-                        <td>{{ object.name }}</td>
-                        <td>{{ object.location }}</td>
-                        <td>
-                            <a
-                                type="button"
-                                class="btn btn-sm btn-secondary"
-                                href="{% url 'subparish-detail' object.id %}">
-                                <i class="fa fa-filter" aria-hidden="true"></i>
-                            </a>
-                            <a
-                                type="button"
-                                class="btn btn-sm btn-info"
-                                href="{% url 'subparish-update' object.id %} ">
-                                <i class="fa fa-pencil" aria-hidden="true"></i>
-                            </a>
-                            <a
-                                type="button"
-                                class="btn btn-sm btn-danger"
-                                href="{% url 'subparish-delete' object.id %} ">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </a>
-                        </td>
-                    </tr>
-                {% endfor %}
-
+                {% block forloop %}
+                    {% for object in object_list  %} 
+                        <tr>
+                            <td>{{ object.name }}</td>
+                            <td>{{ object.location }}</td>
+                            <td>
+                                <a
+                                    type="button"
+                                    class="btn btn-sm btn-secondary"
+                                    href="{% url 'subparish-detail' object.id %}">
+                                    <i class="fa fa-filter" aria-hidden="true"></i>
+                                </a>
+                                <a
+                                    type="button"
+                                    class="btn btn-sm btn-info"
+                                    href="{% url 'subparish-update' object.id %} ">
+                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                </a>
+                                <a
+                                    type="button"
+                                    class="btn btn-sm btn-danger"
+                                    href="{% url 'subparish-delete' object.id %} ">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% endblock forloop %}
             </tbody>
         </table>
     </div>

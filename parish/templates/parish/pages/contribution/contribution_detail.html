@@ -1,54 +1,29 @@
-{% include 'parish/base.html' %}
-{% block content %}
-    <div class="container">
-        <div class="table-title">
-            <div class="row">
-                <div class="col-sm-8"><h2>Contributions <b>Detail</b></h2></div>
-                <div class="col-sm-4 ">
-                    <a 
-                        type="button" 
-                        href="{% url 'contribution-create' %}"
-                        class="btn btn-sm btn-primary my-2 float-right">
-                        <i class="fa fa-plus"></i>
-                        Add New
-                    </a>
-                </div>
-            </div>
-        </div>
-        <table class="table table-hover ">
-            <thead class="thead-dark">
-                <tr>
-                    
-                    <th scope="col">Member</th>
-                    <th scope="col">Amount</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Rank</th>
-                    <th scope="col">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                    <tr>
-                        <td>{{ object.member }}</td>
-                        <td>{{ object.amount }}</td>
-                        <td>{{ object.type }}</td>
-                        <td>{{ object.rank}}</td>
-                        <td>
-                        
-                            <a
-                                type="button"
-                                class="btn btn-sm btn-info"
-                                href="{% url 'contribution-update' object.id %}">
-                                <i class="fa fa-pencil" aria-hidden="true"></i>
-                            </a>
-                            <a
-                                type="button"
-                                class="btn btn-sm btn-danger"
-                                href="{% url 'contribution-delete' object.id %}">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </a>
-                        </td>
-                    </tr>
-            </tbody>
-        </table>
-    </div>
-{% endblock content%}
+{% extends 'parish\pages\contribution\contribution_list.html' %} 
+    {% block header %}
+        <div class="col-sm-8"><h2>Contributions <b>Detail</b></h2></div>
+    {% endblock header %}
+
+    
+    {% block forloop %}
+        <tr>
+            <td>{{ object.member }}</td>
+            <td>{{ object.amount }}</td>
+            <td>{{ object.type }}</td>
+            <td>{{ object.rank}}</td>
+            <td>
+            
+                <a
+                    type="button"
+                    class="btn btn-sm btn-info"
+                    href="{% url 'contribution-update' object.id %}">
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                </a>
+                <a
+                    type="button"
+                    class="btn btn-sm btn-danger"
+                    href="{% url 'contribution-delete' object.id %}">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                </a>
+            </td>
+        </tr>
+    {% endblock forloop %}
