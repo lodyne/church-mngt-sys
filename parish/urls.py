@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import include, path
 from .views import (
     HomeView,
     PriestListView,
@@ -33,8 +33,20 @@ from .views import (
     SubParishDeleteView,
 )
 
+from rest_framework.routers import DefaultRouter, SimpleRouter 
+
+from .viewsets import MemberViewSet
+
+router = DefaultRouter()
+# router = SimpleRouter()
+
+router.register('members',MemberViewSet, basename='members')
+
+
 urlpatterns = [
+    
     path('',HomeView.as_view(), name = 'home'),
+    path('api/',include(router.urls)),
 
     #* urls for PriestViews
 
